@@ -239,7 +239,8 @@ def get_distilbert_labels(model, num_classes: int):
             labels.append(normalize_label(label))
         return labels
 
-    return [str(i) for i in range(num_classes)]
+    # Fallback to hardcoded labels
+    return ["negative", "neutral", "positive"]
 
 
 def order_probability_df(prob_df: pd.DataFrame) -> pd.DataFrame:
