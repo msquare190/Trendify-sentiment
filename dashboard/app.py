@@ -110,8 +110,7 @@ def load_artifacts():
     try:
         distilbert_model = DistilBertForSequenceClassification.from_pretrained(
             "msquare190/trendify-distilbert",
-            force_download=False,
-            ignore_mismatched_sizes=True
+            force_download=True
         ).to(artifacts["device"])
         distilbert_model.eval()
 
@@ -550,8 +549,7 @@ def predict_distilbert(text, model, tokenizer, device="cpu"):
     class_labels = get_distilbert_labels(model, len(probs))
     pred_label = class_labels[pred_idx] if pred_idx < len(class_labels) else str(pred_idx)
     
-    import streamlit as st
-    st.write(f"DEBUG: pred_idx={pred_idx}, class_labels={class_labels}, pred_label={pred_label}")
+
 
     prob_df = pd.DataFrame(
         {
